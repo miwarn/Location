@@ -20,10 +20,6 @@ struct ContentView: View {
             Text("Breite: \(location.latitude)")
             Text("Länge: \(location.longitude)")
             Text("Höhe: \(location.altitude)")
-            Text("Ausrichtung: \(location.magneticHeading)")
-            Text("Strecke: \(location.distance)")
-            Text("Fahrtrichtung: \(location.course)")
-            Text("Geschwindigkeit: \(location.speed)")
         }
     }
 }

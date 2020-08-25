@@ -14,6 +14,7 @@
 		55D1CF9524E9AD0900B03FE1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55D1CF9424E9AD0900B03FE1 /* Preview Assets.xcassets */; };
 		55D1CF9824E9AD0900B03FE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55D1CF9624E9AD0900B03FE1 /* LaunchScreen.storyboard */; };
 		55D1CFA024E9AD2D00B03FE1 /* FetchLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D1CF9F24E9AD2D00B03FE1 /* FetchLocation.swift */; };
+		55E9181C24F4569400FFD905 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E9181B24F4569400FFD905 /* Trip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		55D1CF9724E9AD0900B03FE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55D1CF9924E9AD0900B03FE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55D1CF9F24E9AD2D00B03FE1 /* FetchLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchLocation.swift; sourceTree = "<group>"; };
+		55E9181B24F4569400FFD905 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		55D1CF8A24E9AD0600B03FE1 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				55E9181B24F4569400FFD905 /* Trip.swift */,
 				55D1CF9F24E9AD2D00B03FE1 /* FetchLocation.swift */,
 				55D1CF8B24E9AD0600B03FE1 /* AppDelegate.swift */,
 				55D1CF8D24E9AD0600B03FE1 /* SceneDelegate.swift */,
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55D1CF8C24E9AD0600B03FE1 /* AppDelegate.swift in Sources */,
+				55E9181C24F4569400FFD905 /* Trip.swift in Sources */,
 				55D1CF8E24E9AD0600B03FE1 /* SceneDelegate.swift in Sources */,
 				55D1CFA024E9AD2D00B03FE1 /* FetchLocation.swift in Sources */,
 				55D1CF9024E9AD0600B03FE1 /* ContentView.swift in Sources */,

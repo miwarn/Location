@@ -11,15 +11,11 @@ import Combine
 
 class FetchLocation: NSObject, CLLocationManagerDelegate, ObservableObject {
     let lm = CLLocationManager()
-    var last: CLLocation? = nil
+    var trip: Trip?
     
-    @Published var distance: Double = 0
+    @Published var altitude: Double = 0
     @Published var latitude: Double = 0
     @Published var longitude: Double = 0
-    @Published var altitude: Double = 0
-    @Published var course: Double = 0
-    @Published var magneticHeading: Double = 0
-    @Published var speed: Double = 0
     
     @Published var update: Bool = false {
         didSet {
@@ -35,18 +31,23 @@ class FetchLocation: NSObject, CLLocationManagerDelegate, ObservableObject {
         lm.allowsBackgroundLocationUpdates = true
         lm.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         lm.pausesLocationUpdatesAutomatically = false
-        lm.activityType = .fitness
     }
     
     func start() {
+        if trip == nil {
+            // Start new trip
+            trip = Trip(title: "\(Date())", stages: [Stage(start: Date(), stop: Date(), track: [])])
+        } else {
+            // Continue trip with new stage
+            trip?.stages.append(Stage(start: Date(), stop: Date(), track: []))
+        }
         lm.requestWhenInUseAuthorization()
         lm.startUpdatingLocation()
-        lm.startUpdatingHeading()
     }
     
     func stop() {
         lm.stopUpdatingLocation()
-        lm.stopUpdatingHeading()
+        trip?.stopStage()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -54,16 +55,21 @@ class FetchLocation: NSObject, CLLocationManagerDelegate, ObservableObject {
             latitude = location.coordinate.latitude
             longitude = location.coordinate.longitude
             altitude = location.altitude
-            course = location.course
-            speed = location.speed
-            if let l = last {
-                distance += location.distance(from: l)
-            }
-            last = location
+            trip?.addCoordinates(latitude: latitude, longitude: longitude, altitude: altitude)
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading heading: CLHeading) {
-        magneticHeading = heading.magneticHeading
+    func save() {
+        guard let t = trip else { return }
+        guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("track.txt") else { return }
+        let encoder = JSONEncoder()
+        if let jsondata = try? encoder.encode(t),
+           let jsonstr = String(data: jsondata, encoding: .utf8) {
+            do {
+                try jsonstr.write(to: url, atomically: true, encoding: .utf8)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
